@@ -1,0 +1,4 @@
+<!--pages/shareImage/shareImage.wxml-->
+<button bindtap='saveShareImg'>保存图片</button>
+<button bindtap='savePic'>预览并发送</button>
+<canvas style="width:100%;height:{{windowHeight}}px" canvas-id='shareCanvas' bindlongpress="savePic"></canvas>
