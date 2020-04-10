@@ -1,0 +1,12 @@
+<!--弹窗-->
+<view class="modal-mask" wx:if="{{visible}}"></view>
+<view class="modal-dialog" wx:if="{{visible}}">
+  <view class="modal-title">微信授权</view>
+  <view class="modal-content">
+    请点击确定进行授权登陆
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel">取消</view>
+    <button class="btn-confirm" open-type='getUserInfo' bindgetuserinfo="onConfirm">确定</button>
+  </view>
+</view>

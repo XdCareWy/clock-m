@@ -2,29 +2,13 @@
   "pages": [
     "pages/index/index",
     "pages/shareImage/shareImage",
-    "pages/demo/demo"
+    "pages/clock/clock"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "打卡",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "打卡"
-      },
-      {
-        "pagePath": "pages/shareImage/shareImage",
-        "text": "打卡1"
-      },
-      {
-        "pagePath": "pages/demo/demo",
-        "text": "打卡2"
-      }
-    ]
   },
   "sitemapLocation": "sitemap.json"
 }

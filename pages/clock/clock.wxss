@@ -1,0 +1,63 @@
+page {
+  background-color: #efeff4;
+  font-size: 35rpx;
+}
+
+.section {
+  display: flex;
+  background-color: #fff;
+  height: 115rpx;
+  width: 100%;
+  line-height: 115rpx;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.section text {
+  width: 150rpx;
+  text-align: right;
+  color: #4e4d4d;
+}
+
+.section .defalut-width {
+  height: 115rpx;
+  line-height: 115rpx;
+  width: 530rpx;
+  color: #292727;
+  font-size: 28rpx;
+}
+
+.btn-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 100rpx;
+}
+
+.btn-common {
+  width: 90%;
+  display: inline-block;
+}
+
+.info {
+  padding: 15rpx;
+  font-size: 35rpx;
+}
+
+.point-color {
+  color: red;
+}
+
+.msg {
+  background-color: #e64340;
+  font-size: 34rpx;
+  color: #fff;
+  line-height: 53rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}

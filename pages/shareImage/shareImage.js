@@ -11,6 +11,7 @@ Page({
     windowHeight: 0, //屏幕高度
     restWeek: 0, // 剩余周
     schoolName: "@大树培训学校", // 学校名
+    schoolIcon: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132",
     acatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132",
     teacherName: "张三丰",
     teacherIntro: "3年教龄，资深物理教师",
@@ -36,16 +37,6 @@ Page({
     });
     this.getTempFile(this.data.acatarUrl);
   },
-  onReady: function() {
-    // if (app.globalData.userInfo) {
-    //   const {
-    //     nickName,
-    //     avatarUrl
-    //   } = app.globalData.userInfo;
-    // } else {
-    //   console.log("错误")
-    // }
-  },
   //临时图片路径
   getTempFile: function(url) {
     wx.showLoading({});
@@ -68,16 +59,40 @@ Page({
     wx.downloadFile({
       url: url,
       success: res => {
+        console.log(res)
         that.setData({
           qrCode: res.tempFilePath
         });
-        wx.hideLoading();
-        //生成数据
-        this.handleCanvas();
+        //继续生成学校图片数据
+        that.downloadSchoolIcon(that.data.schoolIcon);
       },
       fail: function(err) {
         wx.showToast({
           title: "下载商品码失败,稍后重试！",
+          icon: "none",
+          duration: 5000
+        });
+      }
+    });
+  },
+  //下载学校图片
+  downloadSchoolIcon: function(url) {
+    let that = this;
+    wx.downloadFile({
+      url: url,
+      success: res => {
+        console.log(res)
+
+        that.setData({
+          schoolIcon: res.tempFilePath
+        });
+        wx.hideLoading();
+        //生成数据
+        that.handleCanvas();
+      },
+      fail: function(err) {
+        wx.showToast({
+          title: "下载学校图标失败,稍后重试！",
           icon: "none",
           duration: 5000
         });
@@ -161,7 +176,8 @@ Page({
       teacherName,
       teacherIntro,
       teacherSlogan,
-      qrCode
+      qrCode,
+      schoolIcon
     } = this.data;
 
     // 2.1 画昵称
@@ -199,7 +215,14 @@ Page({
     });
     // 画底部
     this.paintBottomSection(ctx);
-
+    // 顶部学校下的图片
+    ctx.drawImage(
+      schoolIcon,
+      windowWidth * 0.08,
+      windowHeight * 0.065,
+      windowWidth * 0.179,
+      windowWidth * 0.179
+    );
     // 二维码
     ctx.beginPath();
     ctx.drawImage(
@@ -230,6 +253,11 @@ Page({
       windowWidth * 0.319
     );
     ctx.draw();
+    wx.showToast({
+      title: "长按保存到相册后，就可以分享到朋友圈了哦~",
+      icon: "none",
+      duration: 3000
+    });
   },
   paintBottomSection: function(ctx, params) {
     const {
