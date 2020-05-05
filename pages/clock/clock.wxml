@@ -15,9 +15,9 @@
     </view>
     <view class='section'>
       <text class='label'>课程：</text>
-      <picker class="defalut-width" name="classes" mode="selector" range-key="label" bindchange="bindClassChange" value="{{classId}}" range="{{classData}}">
+      <picker class="defalut-width" name="classes" mode="selector" range-key="name" bindchange="bindClassChange" value="{{classId}}" range="{{classData}}">
         <view class="picker">
-          {{classData[classId].label}}
+          {{classData[classId].name}}
         </view>
       </picker>
     </view>
