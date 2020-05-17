@@ -24,7 +24,7 @@ Page({
   onLoad: function(options) {
     // todo: 读取api接口
     console.log(options)
-    const {className,projectName,teacherIntro,studentName,studentSlogan,teacherName,teacherSlogan, schoolName} = options
+    const {schoolIcon,qrCode,acatarUrl,teacherIntro,studentName,studentSlogan,teacherName,teacherSlogan, schoolName} = options
     this.setData({
       schoolName,
       studentName,
@@ -32,6 +32,9 @@ Page({
       teacherName,
       teacherSlogan,
       teacherIntro,
+      schoolIcon,
+      acatarUrl,
+      qrCode,
       restWeek: 12,
     });
     // 获取屏幕的宽、高

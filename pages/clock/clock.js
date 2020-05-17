@@ -9,6 +9,9 @@ Page({
     teacherId: 0,
     appraiseId: 0,
     visible: false,
+    qrCode: '',
+    schoolIcon: '',
+    acatarUrl: '',
     schoolName: '@大树学校',
     currentComment: '',
     projectData: [], // 项目
@@ -60,9 +63,12 @@ Page({
     const teacherSlogan = this.data.teacherData[teacher].motto || ""
     const teacherIntro = this.data.teacherData[teacher].teacherIntro || "3年教龄，资深物理教师"
     const {schoolName} = this.data
+    const acatarUrl = this.data.acatarUrl || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
+    const schoolIcon = this.data.schoolIcon || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
+    const qrCode = this.data.qrCode || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
     if (className && projectName && name && teacherName && comment &&teacherSlogan) {
       wx.navigateTo({
-        url: `../shareImage/shareImage?teacherIntro=${teacherIntro}&schoolName=${schoolName}&teacherSlogan=${teacherSlogan}&className=${className}&studentName=${name}&projectName=${projectName}&teacherName=${teacherName}&studentSlogan=${comment}`,
+        url: `../shareImage/shareImage?acatarUrl=${acatarUrl}&schoolIcon=${schoolIcon}&qrCode=${qrCode}&teacherIntro=${teacherIntro}&schoolName=${schoolName}&teacherSlogan=${teacherSlogan}&studentName=${name}&teacherName=${teacherName}&studentSlogan=${comment}`,
       })
     } else {
       wx.showToast({
