@@ -1,6 +1,7 @@
 const {
   token,
-  baseUrl
+  baseUrl,
+  baseImageUrl
 } = require('../../utils/constants')
 Page({
   data: {
@@ -9,9 +10,9 @@ Page({
     teacherId: 0,
     appraiseId: 0,
     visible: false,
+    restWeek: 0,
     qrCode: '',
     schoolIcon: '',
-    acatarUrl: '',
     schoolName: '@大树学校',
     currentComment: '',
     projectData: [], // 项目
@@ -24,6 +25,9 @@ Page({
     this.getTeacher()
     this.getUserAppraise()
     this.getCourseType()
+    this.getImageUrl("qrCode", "qrCode")
+    this.getImageUrl("schoolIcon", "schoolIcon")
+    this.getRestWeek()
   },
   bindTeacherChange: function (e) {
     this.setData({
@@ -62,13 +66,13 @@ Page({
     const teacherName = this.data.teacherData[teacher].name || ""
     const teacherSlogan = this.data.teacherData[teacher].motto || ""
     const teacherIntro = this.data.teacherData[teacher].teacherIntro || "3年教龄，资深物理教师"
-    const {schoolName} = this.data
-    const acatarUrl = this.data.acatarUrl || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
+    const acatarUrl = `${baseImageUrl}${this.data.teacherData[teacher].acatarUrl}` || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
+    const {schoolName,restWeek} = this.data
     const schoolIcon = this.data.schoolIcon || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
     const qrCode = this.data.qrCode || "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI8AOs9GU2QObPQNfjWjpibhjWibbyqqibwJd9WbtomrVahicsObr6o0BcXm3thvodJ0hESiboDy0F3iciaQ/132"
     if (className && projectName && name && teacherName && comment &&teacherSlogan) {
       wx.navigateTo({
-        url: `../shareImage/shareImage?acatarUrl=${acatarUrl}&schoolIcon=${schoolIcon}&qrCode=${qrCode}&teacherIntro=${teacherIntro}&schoolName=${schoolName}&teacherSlogan=${teacherSlogan}&studentName=${name}&teacherName=${teacherName}&studentSlogan=${comment}`,
+        url: `../shareImage/shareImage?restWeek=${restWeek}&acatarUrl=${acatarUrl}&schoolIcon=${schoolIcon}&qrCode=${qrCode}&teacherIntro=${teacherIntro}&schoolName=${schoolName}&teacherSlogan=${teacherSlogan}&studentName=${name}&teacherName=${teacherName}&studentSlogan=${comment}`,
       })
     } else {
       wx.showToast({
@@ -132,39 +136,7 @@ Page({
           if (+result === 0) {
             const res = this.data.appraise.find(item => item.code == 0) || {}
             this.setData({
-              teacherData: [{
-                "name": "刘酉成",
-                "motto": "永远用欣赏的眼光看学生,永远用宽容的心态面对学生。",
-                "code": "bs2019010136"
-              }, {
-                "name": "周少峰",
-                "motto": "永远用欣赏的眼光看学生,永远用宽容的心态面对学生。",
-                "code": "bs2020050142"
-              }, {
-                "name": "姚达",
-                "motto": "",
-                "code": "bs2019010141"
-              }, {
-                "name": "张春林",
-                "motto": "",
-                "code": "bs2019010137"
-              }, {
-                "name": "教师测试1",
-                "motto": "教师",
-                "code": "bs2018120004"
-              }, {
-                "name": "文静",
-                "motto": "",
-                "code": "bs2019010138"
-              }, {
-                "name": "王瑶",
-                "motto": "",
-                "code": "bs2019010134"
-              }, {
-                "name": "肖雄",
-                "motto": "",
-                "code": "bs2019010135"
-              }],
+              teacherData: data,
               currentComment: res.userAppraise
             })
           }
@@ -226,5 +198,62 @@ Page({
         }
       }
     })
-  }
+  },
+  // tupian 
+  getImageUrl: function (imageCode, key) {
+    wx.request({
+      url: `${baseUrl}/getImage.do`,
+      method: 'GET',
+      data: {
+        token: token,
+        imageCode: imageCode
+      },
+      success: req => {
+        const {
+          statusCode,
+          data: reqData
+        } = req;
+        if (statusCode === 200) {
+          const {
+            result,
+            data = []
+          } = reqData
+          if (+result === 0) {
+            console.log(data[0][key])
+            this.setData({
+              [key]: data[0] ?`${baseImageUrl}${data[0][key]}` : ''
+            })
+          }
+        }
+      }
+    })
+  },
+  // tupian 
+  getRestWeek: function () {
+    wx.request({
+      url: `${baseUrl}/getSurplusWeek.do`,
+      method: 'GET',
+      data: {
+        token: token,
+      },
+      success: req => {
+        const {
+          statusCode,
+          data: reqData
+        } = req;
+        if (statusCode === 200) {
+          const {
+            result,
+            data = []
+          } = reqData
+          if (+result === 0) {
+            console.log(data[0])
+            this.setData({
+              restWeek: data[0] ? data[0].restWeek : 0
+            })
+          }
+        }
+      }
+    })
+  },
 })
