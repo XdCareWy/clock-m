@@ -24,7 +24,7 @@ Page({
   onLoad: function(options) {
     // todo: 读取api接口
     console.log(options)
-    const {schoolIcon,qrCode,acatarUrl,teacherIntro,studentName,studentSlogan,teacherName,teacherSlogan, schoolName} = options
+    const {schoolIcon,qrCode,acatarUrl,teacherIntro,studentName,studentSlogan,teacherName,teacherSlogan, schoolName,restWeek} = options
     this.setData({
       schoolName,
       studentName,
@@ -35,7 +35,7 @@ Page({
       schoolIcon,
       acatarUrl,
       qrCode,
-      restWeek: 12,
+      restWeek,
     });
     // 获取屏幕的宽、高
     wx.getSystemInfo({
