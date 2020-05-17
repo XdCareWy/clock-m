@@ -61,3 +61,18 @@ page {
   visibility: hidden;
   display: none;
 }
+
+.section-textarea {
+  display: flex;
+  background-color: #fff;
+  min-height: 215rpx;
+  padding-top: 30rpx;
+  width: 100%;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.section-textarea text {
+  width: 150rpx;
+  text-align: right;
+  color: #4e4d4d;
+}

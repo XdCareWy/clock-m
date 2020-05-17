@@ -1,8 +1,5 @@
 {
   "navigationBarTitleText": "打卡",
   "navigationBarBackgroundColor": "#50C5AB",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "my-component": "/components/ModalLogin"
-  }
+  "navigationBarTextStyle": "white"
 }

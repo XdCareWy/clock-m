@@ -23,7 +23,15 @@ Page({
 
   onLoad: function(options) {
     // todo: 读取api接口
+    console.log(options)
+    const {className,projectName,teacherIntro,studentName,studentSlogan,teacherName,teacherSlogan, schoolName} = options
     this.setData({
+      schoolName,
+      studentName,
+      studentSlogan,
+      teacherName,
+      teacherSlogan,
+      teacherIntro,
       restWeek: 12,
     });
     // 获取屏幕的宽、高

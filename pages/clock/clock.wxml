@@ -1,39 +1,49 @@
 <!--pages/enter/gradeEnter.wxml-->
 <view>
-  <form bindsubmit='formSubmit'>
-    <view class='section'>
-      <text class='label'>姓名：</text>
-      <input class="defalut-width" name='name' value='{{student.name}}' placeholder='请输入姓名' />
-    </view>
-    <view class='section'>
-      <text class='label'>项目：</text>
-      <picker class="defalut-width" name="project" mode="selector" range-key="label" bindchange="bindProjectChange" value="{{projectId}}" range="{{projectData}}">
-        <view class="picker">
-          {{projectData[projectId].label}}
-        </view>
-      </picker>
-    </view>
-    <view class='section'>
-      <text class='label'>课程：</text>
-      <picker class="defalut-width" name="classes" mode="selector" range-key="name" bindchange="bindClassChange" value="{{classId}}" range="{{classData}}">
-        <view class="picker">
-          {{classData[classId].name}}
-        </view>
-      </picker>
-    </view>
-    <view class='section'>
-      <text class='label'>老师：</text>
-      <picker class="defalut-width" name="teacher" mode="selector" range-key="label" bindchange="bindTeacherChange" value="{{teacherId}}" range="{{teacherData}}">
-        <view class="picker">
-          {{teacherData[teacherId].label}}
-        </view>
-      </picker>
-    </view>
+	<form bindsubmit='formSubmit'>
+		<view class='section'>
+			<text class='label'>姓名：</text>
+			<input class="defalut-width" name='name' placeholder='请输入姓名' />
+		</view>
+		<view class='section'>
+			<text class='label'>项目：</text>
+			<picker class="defalut-width" name="project" mode="selector" range-key="name" bindchange="bindProjectChange" value="{{projectId}}" range="{{projectData}}">
+				<view class="picker">
+					{{projectData[projectId].name}}
+				</view>
+			</picker>
+		</view>
+		<view class='section'>
+			<text class='label'>课程：</text>
+			<picker class="defalut-width" name="classes" mode="selector" range-key="name" bindchange="bindClassChange" value="{{classId}}" range="{{classData}}">
+				<view class="picker">
+					{{classData[classId].name}}
+				</view>
+			</picker>
+		</view>
+		<view class='section'>
+			<text class='label'>老师：</text>
+			<picker class="defalut-width" name="teacher" mode="selector" range-key="name" bindchange="bindTeacherChange" value="{{teacherId}}" range="{{teacherData}}">
+				<view class="picker">
+					{{teacherData[teacherId].name}}
+				</view>
+			</picker>
+		</view>
+		<view class='section'>
+			<text class='label'>模版：</text>
+			<picker class="defalut-width" name="template" mode="selector" range-key="name" bindchange="bindAppraiseChange" value="{{appraiseId}}" range="{{appraise}}">
+				<view class="picker">
+					{{appraise[appraiseId].name}}
+				</view>
+			</picker>
+		</view>
+		<view class='section-textarea'>
+			<text class='label'>评论：</text>
+			<textarea class="defalut-width" auto-height name='comment' value='我在{{schoolName}}跟【{{teacherData[teacherId].name}}】学习【{{classData[classId].name}}】！{{currentComment}}' placeholder="自动变高" />
+		</view>
 
     <view class='btn-section'>
       <button formType='submit' type='primary' class='btn-common' disabled='{{disabled}}'>打卡</button>
     </view>
   </form>
-  <my-component visible="{{visible}}" bindok="modalOk" bindcancel="modalCancel">
-  </my-component>
 </view>
